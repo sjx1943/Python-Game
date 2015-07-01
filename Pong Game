@@ -55,11 +55,11 @@ def draw(canvas):
         ball_vel[1] = -ball_vel[1]
     if ball_pos[0] - BALL_RADIUS <= PAD_WIDTH:
         if ball_pos[1] >= paddle1_pos - HALF_PAD_HEIGHT and ball_pos[1] <= paddle1_pos + HALF_PAD_HEIGHT:
-            #鍒ゆ柇鏄惁鎾炲埌浜嗘尅鏉�1
+            #球撞到挡板1
             ball_vel[0] = -(ball_vel[0] * 1.1)
     if ball_pos[0] + BALL_RADIUS >= WIDTH - PAD_WIDTH:
         if ball_pos[1] >= paddle2_pos - HALF_PAD_HEIGHT and ball_pos[1] <= paddle2_pos + HALF_PAD_HEIGHT:
-            #鍒ゆ柇鏄惁鎾炲埌浜嗘尅鏉�2
+            #球撞到挡板2
             ball_vel[0] = -(ball_vel[0] * 1.1)
     if ball_pos[0] < PAD_WIDTH:
         score2 += 1
