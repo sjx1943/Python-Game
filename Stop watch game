@@ -1,0 +1,52 @@
+
+import simplegui
+# define global variables
+total_time = 0
+s_stop = 0 #successful stop
+t_stop = 0 #total stop
+
+# define helper function format that converts time
+# in tenths of seconds into formatted string A:BC.D
+def format(t):
+    return str(t//600) + ":" + str((t//100)%6) + str((t//10)%10) + "." + str(t%10)
+    
+# define event handlers for buttons; "Start", "Stop", "Reset"
+def start_handler():
+    timer.start()
+def stop_handler():
+    global s_stop,t_stop,total_time
+    if timer.is_running():
+        t_stop +=1
+        timer.stop()
+        if total_time % 10 ==0:
+            s_stop += 1
+def reset_handler():
+    global total_time,s_stop,t_stop
+    total_time = 0
+    s_stop = 0
+    t_stop = 0
+    timer.stop()
+# define event handler for timer with 0.1 sec interval
+def tick():
+    global total_time
+    total_time += 1
+
+# define draw handler
+def draw(canvas):
+    canvas.draw_text(format(total_time),(75,175),50,"White")
+    canvas.draw_text(str(s_stop) + "/" + str(t_stop),(230,30),30,"Green")
+    
+# create frame
+frame = simplegui.create_frame('Stop watch game',300,300)
+
+# register event handlers
+timer = simplegui.create_timer(100,tick)
+frame.set_draw_handler(draw)
+label1 = frame.add_label('sgg gives to ctt')
+button1 = frame.add_button('Start',start_handler)
+button2 = frame.add_button('Stop',stop_handler)
+button3 = frame.add_button('Reset',reset_handler)
+
+# start frame
+frame.start()
+
